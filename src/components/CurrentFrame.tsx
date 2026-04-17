@@ -1,7 +1,6 @@
 import { Card } from '@heroui/react'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { GuessrContext } from '../contexts/GuessrContext'
-import { getEpisodeFromFrame, getRandomFrame } from '../util/episodeData'
 
 const CurrentFrame = () => {
   const { frame, score, highscore } = useContext(GuessrContext)
