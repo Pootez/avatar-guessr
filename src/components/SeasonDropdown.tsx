@@ -1,0 +1,50 @@
+import { Button, Dropdown, Label, Separator } from '@heroui/react'
+import { getEpisodeInfo } from '../util/episodeData'
+
+const SeasonDropdown = ({
+  name,
+  episodes,
+  color,
+}: {
+  name: string
+  episodes: string[]
+  color: string
+}) => {
+  return (
+    <div className='flex-grow flex items-stretch'>
+      <Dropdown>
+        <Dropdown.Trigger className="flex-grow flex">
+          <Button variant="secondary" className={"flex-grow"+ " " + color}>
+            {name}
+          </Button>
+        </Dropdown.Trigger>
+        <Dropdown.Popover placement='bottom'>
+          <Dropdown.Menu
+            aria-label="Episodes"
+            onAction={(key) => console.log(key)}
+          >
+            {episodes
+              .map((episode, index) => {
+                const { name, episodeNr } = getEpisodeInfo(episode)
+                return (
+                  <Dropdown.Item key={index} id={episode}>
+                    <Label>{episodeNr}</Label>
+                    <Label>{name}</Label>
+                  </Dropdown.Item>
+                )
+              })
+              .reduce(
+                (acc, item, index, arr) =>
+                  index < arr.length - 1
+                    ? [...acc, item, <Separator variant='tertiary' />]
+                    : [...acc, item],
+                [],
+              )}
+          </Dropdown.Menu>
+        </Dropdown.Popover>
+      </Dropdown>
+    </div>
+  )
+}
+
+export default SeasonDropdown

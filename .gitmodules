@@ -1,3 +1,6 @@
 [submodule "src/resources"]
 	path = src/resources
 	url = https://github.com/V3ctoor/avatarguesser.git
+[submodule "public/episodes"]
+	path = public/episodes
+	url = https://github.com/V3ctoor/avatarguesser.git

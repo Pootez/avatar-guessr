@@ -1,16 +1,34 @@
-import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 import CurrentFrame from './components/CurrentFrame'
+import SeasonDropdown from './components/SeasonDropdown'
+import { getEpisodesBySeason } from './util/episodeData'
+import { ButtonGroup } from '@heroui/react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const episodesBySeason = getEpisodesBySeason()
 
   return (
     <>
       <section id="center">
+        <ButtonGroup className='flex items-stretch gap-5 w-full px-16'>
+          <SeasonDropdown
+            name="Book One: Water"
+            episodes={episodesBySeason[0]}
+            color={'text-blue-500'}
+          />
+          <SeasonDropdown
+            name="Book Two: Earth"
+            episodes={episodesBySeason[1]}
+            color={'text-green-500'}
+          />
+          <SeasonDropdown
+            name="Book Three: Fire"
+            episodes={episodesBySeason[2]}
+            color={'text-red-400'}
+          />
+        </ButtonGroup>
         <CurrentFrame />
       </section>
 

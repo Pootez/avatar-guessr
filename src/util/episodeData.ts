@@ -10,8 +10,27 @@ export const getRandomFrame = () => {
   return allFrames[index]
 }
 
-export const getEpisodeName = (frame: string) => {
+export const getEpisodeFromFrame = (frame: string) => {
   return Object.entries(episodes)
     .filter(([_, value]) => value.includes(frame))
     .map(([key, _]) => key)
+}
+
+export const getEpisodesBySeason = () => {
+  return Object.keys(episodes).reduce(
+    (seasons, episode) => {
+      const seasonNr = Number(episode.slice(1, 3))
+      return seasons.map((season, index) =>
+        index + 1 !== seasonNr ? season : [...season, episode],
+      )
+    },
+    [[], [], []] as string[][],
+  )
+}
+
+export const getEpisodeInfo = (episode: string) => {
+  const name = episode.slice(7)
+  const seasonNr = Number(episode.slice(1, 3))
+  const episodeNr = Number(episode.slice(4, 6))
+  return { name, seasonNr, episodeNr }
 }
