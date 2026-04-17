@@ -1,6 +1,6 @@
 import { Button, Dropdown, Label, Separator } from '@heroui/react'
 import { getEpisodeInfo } from '../util/episodeData'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { GuessrContext } from '../contexts/GuessrContext'
 
 const SeasonDropdown = ({
@@ -13,16 +13,23 @@ const SeasonDropdown = ({
   color: string
 }) => {
   const { guessEpisode } = useContext(GuessrContext)
+  const [isOpen, setOpen] = useState(false)
 
   return (
     <div className="flex-grow flex items-stretch">
-      <Dropdown>
+      <Dropdown isOpen={isOpen} onOpenChange={setOpen}>
         <Dropdown.Trigger className="flex-grow flex">
-          <Button variant="secondary" className={'flex-grow' + ' ' + color}>
+          <Button
+            variant="secondary"
+            className={'flex-grow' + ' ' + color}
+          >
             {name}
           </Button>
         </Dropdown.Trigger>
-        <Dropdown.Popover placement="bottom">
+        <Dropdown.Popover
+          placement="bottom"
+          onMouseLeave={() => setOpen(false)}
+        >
           <Dropdown.Menu
             aria-label="Episodes"
             onAction={(key) => guessEpisode(key.toString())}
@@ -32,7 +39,7 @@ const SeasonDropdown = ({
                 const { name, episodeNr } = getEpisodeInfo(episode)
                 return (
                   <Dropdown.Item key={index} id={episode}>
-                    <Label>{episodeNr}</Label>
+                    <Label className={color}>{episodeNr}</Label>
                     <Label>{name}</Label>
                   </Dropdown.Item>
                 )
