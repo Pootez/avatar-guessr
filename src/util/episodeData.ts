@@ -13,7 +13,7 @@ export const getRandomFrame = () => {
 export const getEpisodeFromFrame = (frame: string) => {
   return Object.entries(episodes)
     .filter(([_, value]) => value.includes(frame))
-    .map(([key, _]) => key)
+    .map(([key, _]) => key)[0]
 }
 
 export const getEpisodesBySeason = () => {
