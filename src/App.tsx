@@ -67,13 +67,13 @@ function App() {
         <Alert.Content>
           <Alert.Title>Correct!</Alert.Title>
           <Alert.Description>
-            The episode was:
-            <br />
-            <Label>{previousEpisode}</Label>
-            <br />
             You guessed:
             <br />
             <Label>{previousGuess}</Label>
+            <br />
+            The episode was:
+            <br />
+            <Label>{previousEpisode}</Label>
           </Alert.Description>
         </Alert.Content>
       </Alert> : 
@@ -82,13 +82,13 @@ function App() {
         <Alert.Content>
           <Alert.Title>That's rough buddy...</Alert.Title>
           <Alert.Description>
-            The episode was:
-            <br />
-            <Label>{previousEpisode}</Label>
-            <br />
             You guessed:
             <br />
             <Label>{previousGuess}</Label>
+            <br />
+            The episode was:
+            <br />
+            <Label>{previousEpisode}</Label>
           </Alert.Description>
         </Alert.Content>
 
