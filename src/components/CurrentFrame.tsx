@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { GuessrContext } from '../contexts/GuessrContext'
 
 const CurrentFrame = () => {
-  const { frame, score, highscore } = useContext(GuessrContext)
+  const { frame } = useContext(GuessrContext)
 
   const imgSrc = `/episodes/randomframes/${frame}`
 
@@ -12,9 +12,6 @@ const CurrentFrame = () => {
       className="dark"
       variant="secondary"
     >
-      <Card.Header>
-        <Card.Title>{score + " | " + highscore}</Card.Title>
-      </Card.Header>
       <Card.Content>
         {!!frame ? <img alt="Frame from Avatar" src={imgSrc} className='rounded-3xl' /> : 'No frame'}
       </Card.Content>
