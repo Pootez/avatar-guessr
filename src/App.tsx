@@ -60,7 +60,7 @@ function App() {
         </div>
         <div id="social">
           {
-            (!!previousGuess && !!previousEpisode) && (previousGuess == previousEpisode)
+            !previousGuess ? <></> : (previousGuess == previousEpisode)
             ?
             <Alert status="success">
         <Alert.Indicator />
