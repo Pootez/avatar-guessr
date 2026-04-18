@@ -5,7 +5,7 @@ import { GuessrContext } from '../contexts/GuessrContext'
 const CurrentFrame = () => {
   const { frame } = useContext(GuessrContext)
 
-  const imgSrc = `/episodes/randomframes/${frame}`
+  const imgSrc = `${import.meta.env.BASE_URL}episodes/randomframes/${frame}`
 
   return (
     <Card
