@@ -1,6 +1,6 @@
 import { Button, Dropdown, Label, Separator } from '@heroui/react'
 import { getEpisodeInfo } from '../util/episodeData'
-import { useContext, useState } from 'react'
+import { useContext, useState, type JSX } from 'react'
 import { GuessrContext } from '../contexts/GuessrContext'
 
 const SeasonDropdown = ({
@@ -44,9 +44,9 @@ const SeasonDropdown = ({
                   </Dropdown.Item>
                 )
               })
-              .reduce(
+              .reduce<JSX.Element[]>(
                 (acc, item, index, arr) =>
-                  index < arr.length - 1
+                  index < (arr.length - 1)
                     ? [...acc, item, <Separator variant="tertiary" />]
                     : [...acc, item],
                 [],
