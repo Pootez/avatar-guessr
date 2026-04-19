@@ -7,10 +7,12 @@ const SeasonDropdown = ({
   name,
   episodes,
   color,
+  disabled = false
 }: {
   name: string
   episodes: string[]
   color: string
+  disabled?: boolean
 }) => {
   const { guessEpisode } = useContext(GuessrContext)
   const [isOpen, setOpen] = useState(false)
@@ -20,6 +22,7 @@ const SeasonDropdown = ({
       <Dropdown isOpen={isOpen} onOpenChange={setOpen}>
         <Dropdown.Trigger className="flex-grow flex">
           <Button
+            isDisabled={disabled}
             variant="secondary"
             className={'flex-grow' + ' ' + color}
           >
@@ -31,6 +34,7 @@ const SeasonDropdown = ({
           onMouseLeave={() => setOpen(false)}
         >
           <Dropdown.Menu
+            disabledKeys={disabled ? episodes : []}
             aria-label="Episodes"
             onAction={(key) => guessEpisode(key.toString())}
           >

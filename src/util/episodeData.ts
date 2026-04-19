@@ -4,7 +4,7 @@ import korra from '../episodes/korra.json'
 const aangEpisodes = Object.entries(aang).map(
   ([title, frames]) =>
     true && {
-      title: 'A' + title,
+      title: 'A' + title.slice(0, 1) + title.slice(2),
       frames: frames,
     },
 )
@@ -49,8 +49,8 @@ export const getEpisodesBySeason = () => {
 
 export const getEpisodeInfo = (episode: string) => {
   const show = episode.slice(0, 1)
-  const name = episode.slice(8)
-  const seasonNr = Number(episode.slice(2, 4))
-  const episodeNr = Number(episode.slice(5, 7))
+  const name = episode.slice(7)
+  const seasonNr = Number(episode.slice(2, 3))
+  const episodeNr = Number(episode.slice(4, 6))
   return { show, name, seasonNr, episodeNr }
 }

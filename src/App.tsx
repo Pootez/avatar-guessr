@@ -16,6 +16,28 @@ function App() {
       <section id="center">
         <ButtonGroup className='flex items-stretch gap-5 w-full px-16'>
           <SeasonDropdown
+            name="Book One: Air"
+            episodes={episodesBySeason[3]}
+            color={'text-cyan-500'}
+          />
+          <SeasonDropdown
+            name="Book Two: Spirits"
+            episodes={episodesBySeason[4]}
+            color={'text-orange-300'}
+          />
+          <SeasonDropdown
+            name="Book Three: Change"
+            episodes={episodesBySeason[5]}
+            color={'text-indigo-400'}
+          />
+          <SeasonDropdown
+            name="Book Three: Balance"
+            episodes={episodesBySeason[6]}
+            color={'text-emerald-600'}
+          />
+        </ButtonGroup>
+        <ButtonGroup className='flex items-stretch gap-5 w-full px-16'>
+          <SeasonDropdown
             name="Book One: Water"
             episodes={episodesBySeason[0]}
             color={'text-blue-500'}
