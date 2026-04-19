@@ -7,7 +7,7 @@ const SeasonDropdown = ({
   name,
   episodes,
   color,
-  disabled = false
+  disabled = false,
 }: {
   name: string
   episodes: string[]
@@ -31,7 +31,7 @@ const SeasonDropdown = ({
         </Dropdown.Trigger>
         <Dropdown.Popover
           placement="bottom"
-          onMouseLeave={() => setOpen(false)}
+          // onMouseLeave={() => setOpen(false)}
         >
           <Dropdown.Menu
             disabledKeys={disabled ? episodes : []}
@@ -50,7 +50,7 @@ const SeasonDropdown = ({
               })
               .reduce<JSX.Element[]>(
                 (acc, item, index, arr) =>
-                  index < (arr.length - 1)
+                  index < arr.length - 1
                     ? [...acc, item, <Separator variant="tertiary" />]
                     : [...acc, item],
                 [],

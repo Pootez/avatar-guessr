@@ -17,12 +17,16 @@ const korraEpisodes = Object.entries(korra).map(
 )
 const episodes = [...aangEpisodes, ...korraEpisodes]
 
-export const getAllFrames = () => {
-  return episodes.map(({ frames }) => frames).flat()
+export const getAllFrames = (mode: number) => {
+  return episodes.filter(({ title }) => {
+    const { show, seasonNr } = getEpisodeInfo(title)
+    const modeNr = (show == 'A' ? seasonNr - 1 : seasonNr + 2)
+    return mode & (2 ** modeNr)
+  }).map(({ frames }) => frames).flat()
 }
 
-export const getRandomFrame = () => {
-  const allFrames = getAllFrames()
+export const getRandomFrame = (mode: number) => {
+  const allFrames = getAllFrames(mode)
   const index = Math.floor(Math.random() * allFrames.length)
   return allFrames[index]
 }
