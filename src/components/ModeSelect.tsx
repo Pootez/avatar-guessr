@@ -3,7 +3,7 @@ import { GuessrContext } from '../contexts/GuessrContext'
 import { type Key, Label, ToggleButton, ToggleButtonGroup } from '@heroui/react'
 
 const ModeSelect = () => {
-  const { mode, setMode } = useContext(GuessrContext)
+  const { setMode } = useContext(GuessrContext)
 
   const [aangKeys, setAangKeys] = useState(new Set<Key>(['0', '1', '2']))
   const [korraKeys, setKorraKeys] = useState(new Set<Key>([]))
