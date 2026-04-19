@@ -13,6 +13,8 @@ export type GuessrContextType = {
   previousGuess: string
   setPreviousGuess: React.Dispatch<React.SetStateAction<string>>
   guessEpisode: (episode: string) => void
+  mode: number
+  setMode: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const GuessrContext = createContext<GuessrContextType>({
@@ -27,9 +29,11 @@ export const GuessrContext = createContext<GuessrContextType>({
   previousGuess: '',
   setPreviousGuess: () => {},
   guessEpisode: () => {},
+  mode: 7,
+  setMode: () => {},
 })
 
-const highScoreLocation = 'avatar_high_score'
+const highScoreLocation = 'avatar_high_score_'
 
 export const GuessrContextProvider = ({ children }: { children: any }) => {
   const [frame, setFrame] = useState('')
@@ -37,17 +41,21 @@ export const GuessrContextProvider = ({ children }: { children: any }) => {
   const [highscore, setHighscore] = useState(0)
   const [previousEpisode, setPreviousEpisode] = useState('')
   const [previousGuess, setPreviousGuess] = useState('')
+  const [mode, setMode] = useState(7)
+
+  const modeHighScoreLocation = highScoreLocation + mode
 
   useEffect(() => {
-    const storedHighscore = localStorage.getItem(highScoreLocation)
+    const storedHighscore = localStorage.getItem(modeHighScoreLocation)
     if (!storedHighscore) {
-      localStorage.setItem(highScoreLocation, JSON.stringify(highscore))
+      localStorage.setItem(modeHighScoreLocation, JSON.stringify(highscore))
     }
 
+    setScore(0)
     setHighscore(Number(storedHighscore))
 
-    if (!frame) setFrame(getRandomFrame())
-  }, [])
+    setFrame(getRandomFrame(mode))
+  }, [mode])
 
   const guessEpisode = (episode: string) => {
     const currentEpisode = getEpisodeFromFrame(frame)
@@ -55,14 +63,14 @@ export const GuessrContextProvider = ({ children }: { children: any }) => {
     setPreviousEpisode(currentEpisode)
     setPreviousGuess(episode)
 
-    setFrame(getRandomFrame())
+    setFrame(getRandomFrame(mode))
 
     if (correct) {
       const newScore = score + 1
       setScore(newScore)
       if (newScore > highscore) {
         setHighscore(newScore)
-        localStorage.setItem(highScoreLocation, JSON.stringify(newScore))
+        localStorage.setItem(modeHighScoreLocation, JSON.stringify(newScore))
       }
     } else {
       setScore(0)
@@ -83,6 +91,8 @@ export const GuessrContextProvider = ({ children }: { children: any }) => {
         previousGuess,
         setPreviousGuess,
         guessEpisode,
+        mode,
+        setMode,
       }}
     >
       {children}

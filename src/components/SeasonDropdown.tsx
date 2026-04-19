@@ -7,10 +7,12 @@ const SeasonDropdown = ({
   name,
   episodes,
   color,
+  disabled = false,
 }: {
   name: string
   episodes: string[]
   color: string
+  disabled?: boolean
 }) => {
   const { guessEpisode } = useContext(GuessrContext)
   const [isOpen, setOpen] = useState(false)
@@ -20,6 +22,7 @@ const SeasonDropdown = ({
       <Dropdown isOpen={isOpen} onOpenChange={setOpen}>
         <Dropdown.Trigger className="flex-grow flex">
           <Button
+            isDisabled={disabled}
             variant="secondary"
             className={'flex-grow' + ' ' + color}
           >
@@ -28,9 +31,10 @@ const SeasonDropdown = ({
         </Dropdown.Trigger>
         <Dropdown.Popover
           placement="bottom"
-          onMouseLeave={() => setOpen(false)}
+          // onMouseLeave={() => setOpen(false)}
         >
           <Dropdown.Menu
+            disabledKeys={disabled ? episodes : []}
             aria-label="Episodes"
             onAction={(key) => guessEpisode(key.toString())}
           >
@@ -46,7 +50,7 @@ const SeasonDropdown = ({
               })
               .reduce<JSX.Element[]>(
                 (acc, item, index, arr) =>
-                  index < (arr.length - 1)
+                  index < arr.length - 1
                     ? [...acc, item, <Separator variant="tertiary" />]
                     : [...acc, item],
                 [],
