@@ -1,7 +1,24 @@
-import episodes from '../resources/episodes.json'
+import aang from '../episodes/aang.json'
+import korra from '../episodes/korra.json'
+
+const aangEpisodes = Object.entries(aang).map(
+  ([title, frames]) =>
+    true && {
+      title: 'A' + title,
+      frames: frames,
+    },
+)
+const korraEpisodes = Object.entries(korra).map(
+  ([title, frames]) =>
+    true && {
+      title: 'K' + title,
+      frames: frames,
+    },
+)
+const episodes = [...aangEpisodes, ...korraEpisodes]
 
 export const getAllFrames = () => {
-  return Object.values(episodes).flat()
+  return episodes.map(({ frames }) => frames).flat()
 }
 
 export const getRandomFrame = () => {
@@ -11,26 +28,29 @@ export const getRandomFrame = () => {
 }
 
 export const getEpisodeFromFrame = (frame: string) => {
-  return Object.entries(episodes)
-    .filter(([_, value]) => value.includes(frame))
-    .map(([key, _]) => key)[0]
+  if (!frame) return 'N/A'
+  return episodes
+    .filter(({ frames }) => frames.includes(frame))
+    .map(({ title }) => title)[0]
 }
 
 export const getEpisodesBySeason = () => {
-  return Object.keys(episodes).reduce(
+  return episodes.reduce(
     (seasons, episode) => {
-      const seasonNr = Number(episode.slice(1, 3))
+      const { show, seasonNr } = getEpisodeInfo(episode.title)
+      const seasonIndex = show == 'A' ? seasonNr : seasonNr + 3
       return seasons.map((season, index) =>
-        index + 1 !== seasonNr ? season : [...season, episode],
+        index + 1 !== seasonIndex ? season : [...season, episode.title],
       )
     },
-    [[], [], []] as string[][],
+    [[], [], [], [], [], [], []] as string[][],
   )
 }
 
 export const getEpisodeInfo = (episode: string) => {
-  const name = episode.slice(7)
-  const seasonNr = Number(episode.slice(1, 3))
-  const episodeNr = Number(episode.slice(4, 6))
-  return { name, seasonNr, episodeNr }
+  const show = episode.slice(0, 1)
+  const name = episode.slice(8)
+  const seasonNr = Number(episode.slice(2, 4))
+  const episodeNr = Number(episode.slice(5, 7))
+  return { show, name, seasonNr, episodeNr }
 }
