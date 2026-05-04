@@ -18,6 +18,26 @@ function App() {
       <section id="center">
         <ButtonGroup className="flex items-stretch gap-5 w-full px-16">
           <SeasonDropdown
+            name="Book One: Water"
+            episodes={episodesBySeason[0]}
+            color={'text-blue-500'}
+            disabled={(mode & (2 ** 0)) == 0}
+          />
+          <SeasonDropdown
+            name="Book Two: Earth"
+            episodes={episodesBySeason[1]}
+            color={'text-green-500'}
+            disabled={(mode & (2 ** 1)) == 0}
+          />
+          <SeasonDropdown
+            name="Book Three: Fire"
+            episodes={episodesBySeason[2]}
+            color={'text-red-400'}
+            disabled={(mode & (2 ** 2)) == 0}
+          />
+        </ButtonGroup>
+        <ButtonGroup className="flex items-stretch gap-5 w-full px-16">
+          <SeasonDropdown
             name="Book One: Air"
             episodes={episodesBySeason[3]}
             color={'text-cyan-500'}
@@ -40,26 +60,6 @@ function App() {
             episodes={episodesBySeason[6]}
             color={'text-emerald-600'}
             disabled={(mode & (2 ** 6)) == 0}
-          />
-        </ButtonGroup>
-        <ButtonGroup className="flex items-stretch gap-5 w-full px-16">
-          <SeasonDropdown
-            name="Book One: Water"
-            episodes={episodesBySeason[0]}
-            color={'text-blue-500'}
-            disabled={(mode & (2 ** 0)) == 0}
-          />
-          <SeasonDropdown
-            name="Book Two: Earth"
-            episodes={episodesBySeason[1]}
-            color={'text-green-500'}
-            disabled={(mode & (2 ** 1)) == 0}
-          />
-          <SeasonDropdown
-            name="Book Three: Fire"
-            episodes={episodesBySeason[2]}
-            color={'text-red-400'}
-            disabled={(mode & (2 ** 2)) == 0}
           />
         </ButtonGroup>
         <CurrentFrame />
