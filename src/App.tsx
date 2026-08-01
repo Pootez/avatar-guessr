@@ -56,7 +56,7 @@ function App() {
             disabled={(mode & (2 ** 5)) == 0}
           />
           <SeasonDropdown
-            name="Book Three: Balance"
+            name="Book Four: Balance"
             episodes={episodesBySeason[6]}
             color={'text-emerald-600'}
             disabled={(mode & (2 ** 6)) == 0}
